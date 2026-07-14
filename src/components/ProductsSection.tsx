@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Home,
   Car,
@@ -10,8 +11,22 @@ import {
   Wallet,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
-const products = [
+type Product = {
+  icon: typeof Home;
+  title: string;
+  description: string;
+  /** URL do formulário de cotação do Aggilizador (embed) — só nos ramos ativos. */
+  cotarUrl?: string;
+};
+
+const products: Product[] = [
   {
     icon: Home,
     title: "Seguro Residência",
@@ -21,6 +36,7 @@ const products = [
     icon: Car,
     title: "Seguro Automóvel",
     description: "Cobertura sob medida para seu veículo com assistência 24h e preços competitivos.",
+    cotarUrl: "https://roldi.seucorretor.digital/#/formularios/auto?simplificado=true",
   },
   {
     icon: Building2,
@@ -51,6 +67,7 @@ const products = [
     icon: Bike,
     title: "Seguro Moto",
     description: "Segurança completa para motociclistas com assistência, roubo e colisão.",
+    cotarUrl: "https://roldi.seucorretor.digital/#/formularios/moto?simplificado=true",
   },
   {
     icon: Wallet,
@@ -63,6 +80,8 @@ const whatsappBase =
   "https://wa.me/5548991061107?text=Ol%C3%A1!%20Gostaria%20de%20uma%20consultoria%20especializada%20em%20";
 
 const ProductsSection = () => {
+  const [cotar, setCotar] = useState<Product | null>(null);
+
   return (
     <section id="produtos" className="py-20 md:py-28 bg-secondary">
       <div className="container mx-auto px-4 md:px-6">
@@ -92,26 +111,54 @@ const ProductsSection = () => {
               <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
                 {product.description}
               </p>
-              <Button
-                asChild
-                variant="ghost"
-                size="sm"
-                className="self-start text-gold hover:text-gold-light hover:bg-gold/10 px-0 font-medium"
-              >
-                <a
-                  href={`${whatsappBase}${encodeURIComponent(product.title)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+              <div className="flex items-center justify-between gap-3">
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="text-gold hover:text-gold-light hover:bg-gold/10 px-0 font-medium"
                 >
-                  Saiba mais →
-                </a>
-              </Button>
+                  <a
+                    href={`${whatsappBase}${encodeURIComponent(product.title)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Saiba mais →
+                  </a>
+                </Button>
+                {product.cotarUrl && (
+                  <Button
+                    size="sm"
+                    onClick={() => setCotar(product)}
+                    className="bg-gold hover:bg-gold-light text-gold-foreground font-semibold rounded-md shadow-sm shadow-gold/20"
+                  >
+                    Cotar
+                  </Button>
+                )}
+              </div>
               {/* Gold accent bar */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gold rounded-b-lg scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
             </div>
           ))}
         </div>
       </div>
+
+      <Dialog open={!!cotar} onOpenChange={(open) => !open && setCotar(null)}>
+        <DialogContent className="max-w-3xl w-[95vw] p-0 gap-0 overflow-hidden flex flex-col h-[85vh]">
+          <DialogHeader className="px-6 pt-5 pb-4 text-left shrink-0">
+            <DialogTitle className="font-display text-xl">
+              {cotar ? `Cotação — ${cotar.title.replace("Seguro ", "")}` : "Cotação"}
+            </DialogTitle>
+          </DialogHeader>
+          {cotar && (
+            <iframe
+              src={cotar.cotarUrl}
+              title={`Cotação de ${cotar.title}`}
+              className="w-full flex-1 border-0 bg-white"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
