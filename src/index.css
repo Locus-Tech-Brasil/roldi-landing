@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 0 0% 5%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 5%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 5%;
+
+    --primary: 0 0% 0%;
+    --primary-foreground: 210 20% 98%;
+
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 0 0% 5%;
+
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 40 50% 56%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 40 50% 56%;
+
+    --radius: 0.5rem;
+
+    --gold: 40 50% 56%;
+    --gold-foreground: 0 0% 100%;
+    --gold-light: 40 60% 70%;
+    --navy: 0 0% 0%;
+    --navy-light: 0 0% 10%;
+    --ice: 210 20% 98%;
+  }
+
+  .dark {
+    --background: 213 96% 11%;
+    --foreground: 210 20% 98%;
+
+    --card: 213 60% 15%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 213 60% 15%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 210 20% 98%;
+    --primary-foreground: 213 96% 11%;
+
+    --secondary: 213 60% 17%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 213 60% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 40 50% 56%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 213 60% 17%;
+    --input: 213 60% 17%;
+    --ring: 40 50% 56%;
+
+    --gold: 40 50% 56%;
+    --gold-foreground: 0 0% 100%;
+    --gold-light: 40 60% 70%;
+    --navy: 213 96% 11%;
+    --navy-light: 213 60% 20%;
+    --ice: 210 20% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Scroll-triggered fade-in animation */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* WhatsApp pulse */
+@keyframes whatsapp-pulse {
+  0% {
+    box-shadow: 0 0 0 0 hsla(142, 70%, 45%, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 15px hsla(142, 70%, 45%, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 hsla(142, 70%, 45%, 0);
+  }
+}
+
+.whatsapp-pulse {
+  animation: whatsapp-pulse 2s infinite;
+}
+
+/* Infinite marquee */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Hide marquee on mobile, show grid instead */
+@media (max-width: 767px) {
+  .animate-marquee {
+    display: none;
+  }
+}
