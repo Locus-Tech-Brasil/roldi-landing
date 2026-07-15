@@ -130,20 +130,12 @@ const ProductsSection = () => {
               <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
                 {product.description}
               </p>
-              <div className="flex flex-col gap-3">
-                {product.cotarUrl && (
-                  <Button
-                    onClick={() => setCotar(product)}
-                    className="w-full bg-gold hover:bg-gold-light text-gold-foreground font-semibold rounded-md shadow-sm shadow-gold/20"
-                  >
-                    Solicitar Cotação
-                  </Button>
-                )}
+              <div className="flex items-center justify-between gap-2">
                 <Button
                   asChild
                   variant="ghost"
                   size="sm"
-                  className="self-start text-gold hover:text-gold-light hover:bg-gold/10 px-0 font-medium"
+                  className="shrink-0 px-0 font-medium text-gold hover:bg-transparent hover:text-gold-light"
                 >
                   <a
                     href={`${whatsappBase}${encodeURIComponent(product.title)}`}
@@ -153,6 +145,15 @@ const ProductsSection = () => {
                     Saiba mais →
                   </a>
                 </Button>
+                {product.cotarUrl && (
+                  <Button
+                    size="sm"
+                    onClick={() => setCotar(product)}
+                    className="h-8 shrink-0 rounded-md bg-gold px-3 text-xs font-semibold text-gold-foreground shadow-sm shadow-gold/20 hover:bg-gold-light"
+                  >
+                    Solicitar Cotação
+                  </Button>
+                )}
               </div>
               {/* Gold accent bar */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gold rounded-b-lg scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
