@@ -132,7 +132,7 @@ const ProductsSection = () => {
                     onClick={() => setCotar(product)}
                     className="bg-gold hover:bg-gold-light text-gold-foreground font-semibold rounded-md shadow-sm shadow-gold/20"
                   >
-                    Cotar
+                    Solicitar Cotação
                   </Button>
                 )}
               </div>
