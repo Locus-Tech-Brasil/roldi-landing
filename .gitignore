@@ -30,3 +30,6 @@ dist-ssr
 
 # Arquivos de lock temporários do Office
 ~$*
+
+# build artifacts
+*.zip
