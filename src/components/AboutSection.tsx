@@ -1,5 +1,5 @@
 import { Users, Clock, Award, CheckCircle2 } from "lucide-react";
-import diegoDuarte from "@/assets/diego-duarte.png";
+import diegoDuarte from "@/assets/diego-duarte.webp";
 
 const stats = [
   { icon: Clock, value: "27 anos", label: "de experiência" },

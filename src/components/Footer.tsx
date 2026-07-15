@@ -1,4 +1,4 @@
-import roldiLogo from "@/assets/roldi-logo.png";
+import roldiLogo from "@/assets/roldi-logo.webp";
 
 const Footer = () => {
   return (
