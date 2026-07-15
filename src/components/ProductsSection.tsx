@@ -8,6 +8,8 @@ import {
   Building,
   Heart,
   Bike,
+  Gauge,
+  Plane,
   Wallet,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -31,6 +33,7 @@ const products: Product[] = [
     icon: Home,
     title: "Seguro Residência",
     description: "Proteção completa para seu lar contra incêndio, roubo, danos elétricos e mais.",
+    cotarUrl: "https://roldi.seucorretor.digital/#/formularios/residencial?simplificado=true",
   },
   {
     icon: Car,
@@ -39,35 +42,51 @@ const products: Product[] = [
     cotarUrl: "https://roldi.seucorretor.digital/#/formularios/auto?simplificado=true",
   },
   {
-    icon: Building2,
-    title: "Seguro Empresarial",
-    description: "Blindagem do seu negócio contra riscos operacionais, patrimoniais e de responsabilidade.",
+    icon: Gauge,
+    title: "Seguro Moto",
+    description: "Segurança completa para motociclistas com assistência, roubo e colisão.",
+    cotarUrl: "https://roldi.seucorretor.digital/#/formularios/moto?simplificado=true",
+  },
+  {
+    icon: Bike,
+    title: "Seguro Bike",
+    description: "Cobertura para sua bicicleta contra roubo, furto, danos e acidentes pessoais.",
+    cotarUrl: "https://roldi.seucorretor.digital/#/formularios/bike?simplificado=true",
   },
   {
     icon: Truck,
-    title: "Seguro Frota",
-    description: "Gestão completa de seguros para frotas corporativas com condições especiais.",
+    title: "Seguro Caminhão",
+    description: "Proteção para caminhões e cargas com assistência 24h e coberturas sob medida.",
+    cotarUrl: "https://roldi.seucorretor.digital/#/formularios/caminhao?simplificado=true",
   },
   {
-    icon: KeyRound,
-    title: "Seguro Imobiliário",
-    description: "Proteção para imóveis alugados, fiança locatícia e garantias para proprietários.",
+    icon: Building2,
+    title: "Seguro Empresarial",
+    description: "Blindagem do seu negócio contra riscos operacionais, patrimoniais e de responsabilidade.",
+    cotarUrl: "https://roldi.seucorretor.digital/#/formularios/empresarial?simplificado=true",
   },
   {
     icon: Building,
     title: "Seguro Condomínio",
     description: "Cobertura obrigatória e complementar para condomínios residenciais e comerciais.",
+    cotarUrl: "https://roldi.seucorretor.digital/#/formularios/condominio?simplificado=true",
   },
   {
     icon: Heart,
     title: "Seguro de Vida",
     description: "Proteção financeira para sua família com coberturas por morte, invalidez e doenças graves.",
+    cotarUrl: "https://roldi.seucorretor.digital/#/formularios/vida?simplificado=true",
   },
   {
-    icon: Bike,
-    title: "Seguro Moto",
-    description: "Segurança completa para motociclistas com assistência, roubo e colisão.",
-    cotarUrl: "https://roldi.seucorretor.digital/#/formularios/moto?simplificado=true",
+    icon: Plane,
+    title: "Seguro Viagem",
+    description: "Tranquilidade na viagem com cobertura médica, bagagem e imprevistos no Brasil e exterior.",
+    cotarUrl: "https://roldi.seucorretor.digital/#/formularios/viagem?simplificado=true",
+  },
+  {
+    icon: KeyRound,
+    title: "Seguro Imobiliário",
+    description: "Proteção para imóveis alugados, fiança locatícia e garantias para proprietários.",
   },
   {
     icon: Wallet,
@@ -111,12 +130,20 @@ const ProductsSection = () => {
               <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
                 {product.description}
               </p>
-              <div className="flex items-center justify-between gap-3">
+              <div className="flex flex-col gap-3">
+                {product.cotarUrl && (
+                  <Button
+                    onClick={() => setCotar(product)}
+                    className="w-full bg-gold hover:bg-gold-light text-gold-foreground font-semibold rounded-md shadow-sm shadow-gold/20"
+                  >
+                    Solicitar Cotação
+                  </Button>
+                )}
                 <Button
                   asChild
                   variant="ghost"
                   size="sm"
-                  className="text-gold hover:text-gold-light hover:bg-gold/10 px-0 font-medium"
+                  className="self-start text-gold hover:text-gold-light hover:bg-gold/10 px-0 font-medium"
                 >
                   <a
                     href={`${whatsappBase}${encodeURIComponent(product.title)}`}
@@ -126,15 +153,6 @@ const ProductsSection = () => {
                     Saiba mais →
                   </a>
                 </Button>
-                {product.cotarUrl && (
-                  <Button
-                    size="sm"
-                    onClick={() => setCotar(product)}
-                    className="bg-gold hover:bg-gold-light text-gold-foreground font-semibold rounded-md shadow-sm shadow-gold/20"
-                  >
-                    Solicitar Cotação
-                  </Button>
-                )}
               </div>
               {/* Gold accent bar */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gold rounded-b-lg scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
